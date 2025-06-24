@@ -9,7 +9,7 @@ import {
   clearError
 } from '../store/slices/todoSlice'
 import type { FilterType, Todo } from '../types/todo'
-import { useFetchTodos } from '../hooks/useTodos'
+import { useAddTodo, useFetchTodos } from '../hooks/useTodos'
 
 const TodoApp: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -26,11 +26,20 @@ const TodoApp: React.FC = () => {
     isError 
   } = useFetchTodos()
 
+  const addTodoMutation = useAddTodo()
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     if (inputValue.trim()) {
-      dispatch(addTodo(inputValue.trim()))
-      setInputValue('')
+      addTodoMutation.mutate(inputValue.trim(), {
+        onSuccess: () => {
+          setInputValue('')
+        },
+        onError: (error) => {
+          console.error('Erreur lors de l\'ajout de la tâche:', error)
+          dispatch(clearError())
+        }
+      })
     }
   }
 
