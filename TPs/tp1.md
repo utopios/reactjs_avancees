@@ -5,7 +5,7 @@ Refactoriser une application Todo existante utilisant Redux classique vers Redux
 
 
 
-### Étape 1 : Installation et setup initial (15 minutes)
+### Étape 1 : Installation et setup initial 
 
 ```bash
 # Si vous partez de zéro
@@ -15,7 +15,7 @@ npm install @reduxjs/toolkit react-redux
 npm install @reduxjs/toolkit
 ```
 
-### Étape 2 : Création du store RTK (20 minutes)
+### Étape 2 : Création du store RTK 
 
 **Consignes :**
 1. Créez un nouveau fichier `src/store/store.js`
