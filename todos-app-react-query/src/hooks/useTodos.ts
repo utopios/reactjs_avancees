@@ -11,7 +11,7 @@ export const todoKeys = {
 
 export const useFetchTodos = () => {
   return useQuery({
-    queryKey: todoKeys.all,
+    queryKey: todoKeys.lists(),
     queryFn: todoApi.fetchTodos
   });
 }
@@ -25,12 +25,12 @@ export const useAddTodo = () => {
     onSuccess: (newTodo) => {
     console.log('Nouvelle tâche ajoutée:', newTodo)
       // Mise à jour optimiste du cache
-    //   queryClient.setQueryData<Todo[]>(todoKeys.lists(), (oldTodos = []) => {
-    //     return [...oldTodos, newTodo]
-    //   })
+      queryClient.setQueryData<Todo[]>(todoKeys.lists(), (oldTodos = []) => {
+        return [...oldTodos, newTodo]
+      })
       
       // Alternative : invalider le cache pour refetch
-      queryClient.invalidateQueries({ queryKey: todoKeys.lists() })
+      //queryClient.invalidateQueries({ queryKey: todoKeys.lists() })
     },
     onError: (error) => {
       console.error('Erreur lors de l\'ajout:', error)
