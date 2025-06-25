@@ -9,6 +9,7 @@ import {
   clearError
 } from '../store/slices/todoSlice'
 import type { FilterType, Todo } from '../types/todo'
+import { TodoInput } from './TodoInput'
 
 const TodoApp: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -94,19 +95,7 @@ const TodoApp: React.FC = () => {
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
       <h1>Todo App - Redux Toolkit TypeScript</h1>
       
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Ajouter une tâche..."
-          disabled={loading}
-          style={{ width: '70%', padding: '8px', marginRight: '10px' }}
-        />
-        <button type="submit" disabled={loading || !inputValue.trim()}>
-          {loading ? 'Ajout...' : 'Ajouter'}
-        </button>
-      </form>
+      <TodoInput/>
 
       {error && (
         <div style={{ color: 'red', margin: '10px 0' }}>
