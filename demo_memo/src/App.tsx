@@ -1,9 +1,22 @@
-import { useState } from 'react'
+import { use, useCallback, useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 import { memo } from 'react';
+
+
+const Utilisateurs = ({ utilisateurs }: { utilisateurs: string[] }) => {
+  const utilisateursFiltres = useMemo(() => 
+    utilisateurs.filter((user) => user.startsWith("A")), [utilisateurs]);
+  return (
+    <ul>
+      {utilisateursFiltres.map((user, index) => (
+        <li key={index}>{user}</li>
+      ))}
+    </ul>
+  );
+};
 
 const Titre = memo(({ texte }: { texte: string }) => {
   console.log("Titre rendu");
@@ -15,11 +28,16 @@ const Titre = memo(({ texte }: { texte: string }) => {
 
 function App() {
   const [count, setCount] = useState(0);
-
+  // const handleSubmit = useCallback(({user}: string) => {
+  //     console.log("Form submitted with user:", user);
+  //     dispatch(addUser(user));
+  // }, [dispacth]);
+  const incrementer = useCallback(() => setCount(count + 1), [count]);
   return (
     <>
+      <Utilisateurs utilisateurs={["Alice", "Bob", "Charlie", "David", "Eve", "Frank"]} />
       <Titre texte={`Mon Titre ${count}`} />
-      <button onClick={() => setCount(count + 1)}>Incrémenter</button>
+      <button onClick={incrementer}>Incrémenter</button>
     </>
   )
 }
