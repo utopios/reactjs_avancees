@@ -10,6 +10,7 @@ import {
 } from '../store/slices/todoSlice'
 import type { FilterType, Todo } from '../types/todo'
 import { TodoInput } from './TodoInput'
+import { FilterButtons } from './FilterButtons'
 
 const TodoApp: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -103,26 +104,7 @@ const TodoApp: React.FC = () => {
         </div>
       )}
       
-      <div style={{ margin: '20px 0' }}>
-        <button 
-          onClick={() => handleSetFilter('ALL')}
-          style={buttonStyle(filter === 'ALL')}
-        >
-          Toutes ({todos.length})
-        </button>
-        <button 
-          onClick={() => handleSetFilter('ACTIVE')}
-          style={buttonStyle(filter === 'ACTIVE')}
-        >
-          Actives ({activeCount})
-        </button>
-        <button 
-          onClick={() => handleSetFilter('COMPLETED')}
-          style={buttonStyle(filter === 'COMPLETED')}
-        >
-          Terminées ({completedCount})
-        </button>
-      </div>
+      <FilterButtons></FilterButtons>
 
       {loading && todos.length === 0 ? (
         <div>Chargement des tâches...</div>
