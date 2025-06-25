@@ -18,13 +18,16 @@ const Utilisateurs = ({ utilisateurs }: { utilisateurs: string[] }) => {
   );
 };
 
-const Titre = memo(({ texte }: { texte: string }) => {
-  console.log("Titre rendu");
-  return <h1>{texte}</h1>;
-},(prevProps, nextProps) => {
-  console.log("Comparaison des props", prevProps, nextProps);
-  return prevProps.texte === nextProps.texte;
-});
+const Titre = ({ texte }: { texte: string }) => {
+  const [updateText, setUpdateText] = useState(texte);
+  const toCapitalize = useMemo(() => {
+    setUpdateText(updateText.toUpperCase());
+    console.log("Titre rendu");
+    return <h1>{updateText}</h1>;
+  }, [updateText]);
+
+  return toCapitalize;
+};
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,6 +36,7 @@ function App() {
   //     dispatch(addUser(user));
   // }, [dispacth]);
   const incrementer = useCallback(() => setCount(count + 1), [count]);
+  
   return (
     <>
       <Utilisateurs utilisateurs={["Alice", "Bob", "Charlie", "David", "Eve", "Frank"]} />
