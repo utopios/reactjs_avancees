@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { ThemeProvider } from './contexts/themeContext'
 import { useTheme } from './contexts/themeContext'
+import { NotificationsList } from './components/NotificationsList'
+import { NotificationProvider } from './contexts/notificationContext'
+import { TestButtons } from './components/TestButtons'
 
 const Enfant = () => {
-  const { theme, toggleTheme }  = useTheme()
+  const { theme, toggleTheme } = useTheme()
   return (
     <div>
       <p>Current theme: {theme}</p>
       <button onClick={toggleTheme}>Toggle Theme</button>
+      <TestButtons></TestButtons>
     </div>
   )
 }
@@ -20,28 +22,14 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="light">
-      <div>
-        <Enfant />
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NotificationProvider>
+        <div>
+          <Enfant />
+        </div>
+        <NotificationsList />
+      </NotificationProvider>
     </ThemeProvider>
+
   )
 }
 
