@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Counter from './Counter';
 import React from 'react';
 import '@testing-library/jest-dom';
-import { renderWithProviders } from '../helpers/test-utils';
+import { renderWithProviders } from '../helpers/redux-test-utils';
 describe('Counter Component', () => {
   test('renders with initial value', () => {
     render(<Counter initialValue={5} />);

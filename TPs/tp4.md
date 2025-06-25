@@ -57,4 +57,13 @@ Créer une suite de tests complète pour votre application Todo  en couvrant tou
 4. Simulez les conditions réseau
 
 
+#### Solutions
+
+```bash
+npm install -D @testing-library/react @testing-library/jest-dom @testing-library/user-event
+npm install -D msw @types/jest vitest jsdom
+
+```
+
+
 
