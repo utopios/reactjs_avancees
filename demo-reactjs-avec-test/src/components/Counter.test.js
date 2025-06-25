@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Counter from './Counter';
 import React from 'react';
 import '@testing-library/jest-dom';
+import { renderWithProviders } from '../helpers/test-utils';
 describe('Counter Component', () => {
   test('renders with initial value', () => {
     render(<Counter initialValue={5} />);
@@ -38,7 +39,7 @@ describe('Counter Component', () => {
 
   test('resets counter to zero when reset button is clicked', async () => {
     const user = userEvent.setup();
-    render(<Counter initialValue={10} />);
+    renderWithProviders(<Counter initialValue={10} />, {});
     
     const counter = screen.getByTestId('counter');
     const resetButton = screen.getByRole('button', { name: /reset/i });
